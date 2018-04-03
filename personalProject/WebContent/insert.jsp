@@ -38,21 +38,50 @@
 	<link rel="stylesheet" href="css/style.css">
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>	
-	<script>
-	
-	   /*id="ID" 아이디는 글자수 8자리 이하는 가입이 안되는것으로 한다. 
-	   			만약 8자리 이하라면 경고 창을 띄워주고 커서가 틀린 방향으로 향하게 한다.
-	   			제이쿼리로 사용하자 */	   
-	
-
+	<script src="js/modernizr-2.6.2.min.js"></script>
+		<!-- 
+			아이디 비밀번호는 8글자 이상으로 해주세요 
+			8글자 이하 일때 빨간 글씨가 보이게 해주세요 
+			틀린곳에 포커스를 맞춰 주세요. 
+		 -->
+	<script>		
 		$(document).ready(function(){
-			$("#btn").click(function(){
-				if($("input.ID").val().length < 8) {
-					alert("아이디를 8자 이상입력하세요!");						
-						$("input.ID").focus();						
-				}			
-		});	
+			$('#hidentextId').hide();
+			$('#hidentextPw').hide();
+			$('#hidentextRe').hide();
+			$('#hidentextEm').hide();
+			$('#hidentextPh').hide();
+			$('#hidentextNa').hide();
+			var color = ['red','blue','green'];
+		if($('#ID').val().length < 8){
+			$('#ID').keyup(function(){
+				$('#hidentextId').show();
+				$('#hidentextId').css('color','red');				
+					if($('#ID').val().length > 8){
+						$('#hidentextId').hide();
+					}		
+			});
+		}
+		if($('#PASSWARD').val().length < 8){
+			$('#PASSWARD').keyup(function(){
+				$('#hidentextPw').show();
+				$('#hidentextPw').css('color','red');				
+					if($('#PASSWARD').val().length > 8){
+						$('#hidentextPw').hide();
+					}else if($('#RE-PASSWARD').val() !== $('#PASSWARD').val()){
+						$('#RE-PASSWARD').keyup(function(){
+							$('#hidentextRe').show();
+							$('#hidentextRe').css('color','red');				
+								if($('#RE-PASSWARD').val() === $('#PASSWARD').val()){
+									$('#hidentextRe').hide();
+								}		
+						});			
+					}					
+			});			
+		}
+		
+			
+		});		
 	</script>
 
 	</head>
@@ -122,36 +151,42 @@
 							<div class="col-md-12">
 								<label class="sr-only" for="name">ID</label>
 								<input type="text" id="ID" class="form-control" placeholder="Your ID" name="id">
+								<h3 id="hidentextId">글자수를 8글자 이상으로 해주세요</h3>
 							</div>							
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">PASSWARD</label>
 								<input type="password" id="PASSWARD" class="form-control" placeholder="Your passward" name="PASSWARD">
+								<h3 id="hidentextPw">글자수를 8글자 이상으로 해주세요</h3>
 							</div>							
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">RE-PASSWARD</label>
 								<input type="password" id="RE-PASSWARD" class="form-control" placeholder="Your passward" name="RE-PASSWARD">
+								<h3 id="hidentextRe">제입력된 패스워드가 틀립니다.</h3>
 							</div>							
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="email">Email</label>
 								<input type="text" id="email" class="form-control" placeholder="Your email address" name="Email">
+								<h3 id="hidentextEm">잘못된 이메일 주소입니다.</h3>
 							</div>
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="email">PHONE_NUMBER</label>
 								<input type="text" id="PHONE_NUMBER" class="form-control" placeholder="Your PHONE NUMBER" name="PHONE_NUMBER">
+								<h3 id="hidentextPh">정확한 핸드폰 번호를 입력해주세요</h3>
 							</div>
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="email">NAME</label>
 								<input type="text" id="NAME" class="form-control" placeholder="Your NAME" name="NAME">
+								<h3 id="hidentextNa">이름을 입력해주세요</h3>
 							</div>
 						</div>
 						
